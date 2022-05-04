@@ -1,9 +1,13 @@
+// Variables
+
 var juegos = prompt("¿Cuantos Desafios vas a jugar?")
 
 var juegosRealizados = 0
 var usuarioPuntaje = 0
 var maquinaPuntaje = 0
 var empatePuntaje = 0
+
+// Ciclo While
 
 while (juegosRealizados < juegos) {
     var usuario = juegoUsuario()
