@@ -1,109 +1,109 @@
-var Jugadas = parseInt(prompt("Veces que desea Jugar:"));
+var juegos = prompt("¿Cuantos Desafios vas a jugar?")
 
-var dato = document.getElementById("jugar");
+var juegosRealizados = 0
+var usuarioPuntaje = 0
+var maquinaPuntaje = 0
+var empatePuntaje = 0
 
-dato.innerHTML = Jugadas;
+while (juegosRealizados < juegos) {
+    var usuario = juegoUsuario()
+    alert(`El Usuario jugó: ${usuario}`)
 
-var usuarioGana = 0;
-var maquinaGana = 0;
-var usuarioJuega = Jugadas;
-var juegosActuales = 0;
+    var maquina = juegoMaquina()
+    alert(`La Máquina jugó: ${maquina}`)
 
-while (juegosActuales < usuarioJuega) {
+    elGanadorEs(usuario, maquina)
 
-    var usuario = parseInt(prompt("Elija: Piedra(1), Papel(2), Tijera(3)"))
-    var maquina = jugada()
-
-    ganador(usuario, maquina)
-
-    juegosActuales++
-
+    juegosRealizados++
 }
 
+triunfadorFinal(usuarioPuntaje, maquinaPuntaje, empatePuntaje)
 
-    juego(usuarioGana, maquinaGana)
+// El Usuario realiza su jugada
 
+function juegoUsuario() {
+    var elige = parseInt(prompt("Elegir un alternativa entre 0, 1 o 2:\n0: Piedra\n1: Papel\n2: Tijera"))
 
-function juego(usuarioGana, maquinaGana) {
-    if (usuarioGana > maquinaGana) {
-
-        alert(`Has ganado el juego`)
-        document.getElementById("resultado").innerHTML = "¡Has Ganado el juego!"
+    if (elige == 0) {
+        elige = "piedra"
     }
-    
-    else if (usuarioGana< maquinaGana) {
-        alert(`Perdiste el juego`)
-        document.getElementById("resultado").innerHTML = "Eres un Perdedor"
+    else if (elige == 1) {
+        elige = "papel"
     }
-
     else {
-        alert(`Esto es un Empate`)
-        document.getElementById("resultado").innerHTML = "Solo Empate"
+        elige = "tijera"
     }
+
+    return elige
 }
 
-function jugada() {
-    var numAleatorio = Math.floor(Math.random() * 3);
+// La máquina realiza su jugada
 
-    return numAleatorio
+function juegoMaquina() {
+
+    var maquinaRandom = Math.floor(Math.random() * 3)
+    if (maquinaRandom == 0) {
+        maquinaRandom = "piedra"
+    }
+    else if (maquinaRandom == 1) {
+        maquinaRandom = "papel"
+    }
+    else {
+        maquinaRandom = "tijera"
+    }
+
+    return maquinaRandom
 }
 
-function ganador(usuarioResultado, maquinaResultado) {
+// Función ganador cachipun
 
-    var puntajeObtenido = ["piedra", "papel", "tijera"]
-
-    if (usuarioResultado == 0) {
-
-        if (maquinaResultado == 0) {
-            alert(`Es un empate. Los puntajes son: ${puntajeObtenido[usuarioResultado]}`);
-        }
-        else if (maquinaResultado == 1) {
-            alert(`¡Ganaste!. Los puntajes son: ${puntajeObtenido[usuarioResultado]}, ${resultadosJugada[resultadoMaquina]}`);
-            usuarioGana++
-        }
-        else if (maquinaResultado == 2) {
-            alert(`¡Perdiste! Los puntajes son: ${puntajeObtenido[usuarioResultado]}, ${resultadosJugada[resultadoMaquina]}`);
-            maquinaGana++
-        }
-        else {
-            alert(`Cuek`)
-        }
+function elGanadorEs(jugadorUsuario, jugadorMaquina) {
+    if ((jugadorUsuario == "papel") && (jugadorMaquina == "piedra")) {
+        alert(`¡Ganaste! Tu puntaje es: ${jugadorUsuario}\n y el puntaje de la máquina es: ${jugadorMaquina}`)
+        usuarioPuntaje += 1
     }
-
-    else if (usuarioResultado == 1) {
-
-        if (maquinaResultado == 1) {
-            alert(`Es un empate. Los puntajes son: ${puntajeObtenido[usuarioResultado]}`);
-        }
-        else if (maquinaResultado == 0) {
-            alert(`¡Ganaste! Los puntajes son: ${puntajeObtenido[usuarioResultado]}, ${puntajeObtenido[maquinaResultado]}`);
-            usuarioGana++
-        }
-        else if (maquinaResultado == 2) {
-            alert(`¡Perdiste! Los puntajes son: ${puntajeObtenido[usuarioResultado]}, ${puntajeObtenido[maquinaResultado]}`);
-            maquinaGana++
-        }
-
-        else {
-            alert(`Cuek`)
-        }
+    else if ((jugadorUsuario == "piedra") && (jugadorMaquina == "papel")) {
+        alert(`¡Perdiste!: Tu puntaje es: ${jugadorUsuario}\n y el puntaje de la maquina ${jugadorMaquina}`)
+        maquinaPuntaje += 1
     }
-
-    else if (usuarioResultado == 2) {
-
-        if (maquinaResultado == 2) {
-            alert(`Es un empate. Los puntajes son: ${puntajeObtenido[usuarioResultado]}`);
-        }
-        else if (maquinaResultado == 1) {
-            alert(`¡Ganaste! Los puntajes son: ${puntajeObtenido[usuarioResultado]}, ${puntajeObtenido[maquinaResultado]}`);
-            usuarioGana++
-        }
-        else if (maquinaResultado == 0) {
-            alert(`¡Perdiste! Los puntajes son: ${puntajeObtenido[usuarioResultado]}, ${puntajeObtenido[maquinaResultado]}`);
-            maquinaGana++
-        }
-        else {
-            alert(`Cuek`)
-        }
+    else if ((jugadorUsuario == "tijera") && (jugadorMaquina == "papel")) {
+        alert(`¡Ganaste! Tu puntaje es: ${jugadorUsuario}\n y el puntaje de la máquina es: ${jugadorMaquina}`)
+        usuarioPuntaje += 1
     }
+    else if ((jugadorUsuario == "papel" && jugadorMaquina == "tijera")) {
+        alert(`¡Perdiste!: Tu puntaje es: ${jugadorUsuario}\n y el puntaje de la maquina ${jugadorMaquina}`)
+        maquinaPuntaje += 1
+    }
+    else if ((jugadorUsuario == "piedra") && (jugadorMaquina == "tijera")) {
+        alert(`¡Ganaste! Tu puntaje es: ${jugadorUsuario}\n y el puntaje de la máquina es: ${jugadorMaquina}`)
+        usuarioPuntaje += 1
+    }
+    else if ((jugadorUsuario == "tijera") && (jugadorMaquina == "piedra")) {
+        alert(`¡Perdiste!: Tu puntaje es: ${jugadorUsuario}\n y el puntaje de la maquina ${jugadorMaquina}`)
+        maquinaPuntaje += 1
+    }
+    else {
+        alert(`Empate: Tu elegiste ${jugadorUsuario}\n y la máquina eligió: ${jugadorMaquina}`)
+        empatePuntaje += 1
+    }
+}
+// Función ganador del juego
+
+function triunfadorFinal(jugUsuario, jugMaquina, jugEmpate) {
+    if (jugUsuario == jugMaquina) {
+        document.write("<h3>Empatados</h3>")
+    }
+    else if (jugEmpate > jugUsuario && jugEmpate > jugMaquina) {
+        document.write("<h1>Esto es un Tie</h1>")
+    }
+    else if (jugUsuario > jugMaquina) {
+        document.write("<h1>¡Eres un Winner!</h1>")
+    }
+    else {
+        document.write("<h1>¡Eres un Looser!</h1>")
+    }
+    document.write("<h2>Puntaje</h2>")
+    document.write(`<p>Usuario: ${jugUsuario} pts</p>`)
+    document.write(`<p>Máquina: ${jugMaquina} pts</p>`)
+    document.write(`<p>Empate: ${jugEmpate} pts</p>`)
 }

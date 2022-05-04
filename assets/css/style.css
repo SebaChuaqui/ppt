@@ -1,0 +1,13 @@
+body{
+    background-image: url(../img/cachipun.jpg);
+    border: 5px solid black;
+    width: 50%;
+    border-radius: 50%;
+    text-align: center;
+
+}
+
+h1, h2, h3, p{
+    color: black;
+    text-align: center;
+}
