@@ -94,20 +94,23 @@ function elGanadorEs(jugadorUsuario, jugadorMaquina) {
 // Función ganador del juego
 
 function triunfadorFinal(jugUsuario, jugMaquina, jugEmpate) {
+    
+    var div =  document.getElementById("resultado")
+
     if (jugUsuario == jugMaquina) {
-        document.write("<h3>Empatados</h3>")
+        div.innerHTML += "<h3>ESTO ES UN TIE</h3>"
     }
     else if (jugEmpate > jugUsuario && jugEmpate > jugMaquina) {
-        document.write("<h1>Esto es un Tie</h1>")
+        div.innerHTML += "<h1>ESTO ES UN TIE</h1>"
     }
     else if (jugUsuario > jugMaquina) {
-        document.write("<h1>¡Eres un Winner!</h1>")
+        div.innerHTML += "<h1>¡ERES UN WINNER!</h1>"
     }
     else {
-        document.write("<h1>¡Eres un Looser!</h1>")
+        div.innerHTML += "<h1>¡ERES UN LOOSER!</h1>"
     }
-    document.write("<h2>Puntaje</h2>")
-    document.write(`<p>Usuario: ${jugUsuario} pts</p>`)
-    document.write(`<p>Máquina: ${jugMaquina} pts</p>`)
-    document.write(`<p>Empate: ${jugEmpate} pts</p>`)
+    div.innerHTML +="<h2>PUNTAJE</h2>"
+    div.innerHTML +=`<p>USUARIO: ${jugUsuario} pts</p>`
+    div.innerHTML +=`<p>MAQUINA: ${jugMaquina} pts</p>`
+    div.innerHTML +=`<p>EMPATE: ${jugEmpate} pts</p>`
 }
